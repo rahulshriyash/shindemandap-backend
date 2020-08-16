@@ -50,7 +50,7 @@ public class BlogController {
 	
 	@GetMapping("/blogs")
 	public List<BlogEntity> getBlogs() {
-		System.out.println("in getBlogs contoller");
+		System.out.println("in getBlogs contoller git testing");
 		return blogService.getBlogs();
 	}
 	
