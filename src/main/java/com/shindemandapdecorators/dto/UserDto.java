@@ -6,7 +6,7 @@ public class UserDto {
 	private String lastName;
 	private String password;
 	private String email;
-
+	private String username;
 	public int getId() {
 		return id;
 	}
@@ -45,6 +45,14 @@ public class UserDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
