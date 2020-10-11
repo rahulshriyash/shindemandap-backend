@@ -54,7 +54,6 @@ public class SubscriptionController {
 			throw new RecordNotFoundException("Invalid subscription id : " + id);
 		}
 		return new ResponseEntity<SubscriptionEntity>(subscriptionEntity, HttpStatus.OK);
-		// return ResponseEntity.ok().body(subscriptionService.getUserById(id));
 	}
 
 	@DeleteMapping("/subscription/{id}")
@@ -64,6 +63,5 @@ public class SubscriptionController {
 			throw new RecordNotFoundException("Invalid user id : " + id);
 		}
 		return new ResponseEntity<SubscriptionEntity>(subscriptionEntity, HttpStatus.OK);
-		// return ResponseEntity.ok().body(subscriptionService.getUserById(id));
 	}
 }

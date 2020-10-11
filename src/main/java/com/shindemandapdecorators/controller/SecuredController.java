@@ -12,8 +12,8 @@ public class SecuredController {
 	
 	@GetMapping
 	
-	public ResponseEntity reachSecureEndPoint() {
-		return new ResponseEntity("If your are reading this you reached a secure endpoint", HttpStatus.OK);
+	public ResponseEntity<String> reachSecureEndPoint() {
+		return new ResponseEntity<String>("If your are reading this you reached a secure endpoint", HttpStatus.OK);
 	}
 
 }

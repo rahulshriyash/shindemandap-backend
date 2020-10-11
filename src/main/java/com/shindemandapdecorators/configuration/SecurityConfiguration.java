@@ -18,7 +18,7 @@ import com.shindemandapdecorators.service.ApplicationUserDetailsService;
 
 
 import static com.shindemandapdecorators.constants.SecurityConstants.SIGN_UP_URL;
-
+import static com.shindemandapdecorators.constants.SecurityConstants.LOGIN_URL;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private ApplicationUserDetailsService userDetailsService;
@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthenticationFilter(authenticationManager()))

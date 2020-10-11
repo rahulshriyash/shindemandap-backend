@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.shindemandapdecorators.dto.BlogDto;
 
 import com.shindemandapdecorators.entity.BlogEntity;
@@ -27,33 +26,32 @@ import com.shindemandapdecorators.service.BlogService;
 @RestController
 @RequestMapping
 public class BlogController {
-	
+
 	@Autowired
 	private BlogService blogService;
 
-	
 	@PostMapping("/blog")
 	public BlogDto addEnquiry(@ModelAttribute BlogDto blogDto) throws IOException {
 		System.out.println("in post Blog getBlogTitle");
-		
+
 		BlogEntity blogEntity = blogService.addBlog(blogDto);
 		blogDto.setId(blogEntity.getId());
 		return blogDto;
 	}
-	
+
 	@PutMapping("/blog/{id}")
 	public BlogDto updateBlog(@PathVariable int id, @ModelAttribute BlogDto blogDto) throws IOException {
 		blogDto.setId(id);
 		blogService.updateBlog(blogDto);
 		return blogDto;
 	}
-	
+
 	@GetMapping("/blogs")
 	public List<BlogEntity> getBlogs() {
 		System.out.println("in getBlogs contoller");
 		return blogService.getBlogs();
 	}
-	
+
 	@GetMapping("/blog/{id}")
 	public ResponseEntity<BlogEntity> getBlogById(@PathVariable int id) {
 		BlogEntity blogEntity = blogService.getBlogById(id);

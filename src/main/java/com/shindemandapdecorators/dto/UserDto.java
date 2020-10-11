@@ -7,6 +7,7 @@ public class UserDto {
 	private String password;
 	private String email;
 	private String username;
+
 	public int getId() {
 		return id;
 	}

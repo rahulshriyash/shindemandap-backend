@@ -23,9 +23,8 @@ public class BlogEntity {
 	@Column(name = "description")
 	private String blogDescription;
 
-	
 	@Lob
-	@Column(name = "image", columnDefinition="BLOB")
+	@Column(name = "image", columnDefinition = "BLOB")
 	private byte[] blogImage;
 
 	public int getId() {
@@ -59,11 +58,5 @@ public class BlogEntity {
 	public void setBlogImage(byte[] blogImage) {
 		this.blogImage = blogImage;
 	}
-
-	
-
-	
-	
-	
 
 }

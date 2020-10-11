@@ -28,7 +28,7 @@ public class UserService {
 		userEntity.setEmail(userDto.getEmail());
 		userEntity.setPassword(userDto.getPassword());
 		userEntity.setUsername(userDto.getUsername());
-		userEntity=repository.saveAndFlush(userEntity);
+		userEntity = repository.saveAndFlush(userEntity);
 		return userEntity;
 	}
 
@@ -41,7 +41,7 @@ public class UserService {
 			userEntity.setLastName(userDto.getLastName());
 			userEntity.setEmail(userDto.getEmail());
 			userEntity.setPassword(userDto.getPassword());
-			userEntity=repository.saveAndFlush(userEntity);
+			userEntity = repository.saveAndFlush(userEntity);
 			return userEntity;
 		} else {
 			System.out.println("Record not found with id : " + userDb.get());

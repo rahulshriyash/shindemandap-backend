@@ -3,13 +3,13 @@ package com.shindemandapdecorators.dto;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BlogDto {
-	
+
 	private int id;
-	
+
 	private String blogTitle;
-	
+
 	private String blogDescription;
-	
+
 	private MultipartFile blogImage;
 
 	public int getId() {
@@ -43,8 +43,5 @@ public class BlogDto {
 	public void setBlogImage(MultipartFile blogImage) {
 		this.blogImage = blogImage;
 	}
-
-	
-	
 
 }

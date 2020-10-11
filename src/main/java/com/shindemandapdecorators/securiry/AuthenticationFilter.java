@@ -23,43 +23,42 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
 import static com.shindemandapdecorators.constants.SecurityConstants.*;
+
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+	public AuthenticationFilter(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
-    	Authentication authObj;
-    	try {
-        	System.out.println("in aut filter " + req.getParameter("username"));
-            UserEntity applicationUser = new ObjectMapper().readValue(req.getInputStream(), UserEntity.class);
-            System.out.println("applicationUser " + applicationUser.getUsername() + applicationUser.getPassword());
-            authObj   = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(applicationUser.getUsername(),
-                            applicationUser.getPassword(), new ArrayList<>())
-            );
-            System.out.println("authObj = " +authObj.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return authObj;
-    }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
+			throws AuthenticationException {
+		Authentication authObj;
+		try {
+			System.out.println("in aut filter " + req.getParameter("username"));
+			UserEntity applicationUser = new ObjectMapper().readValue(req.getInputStream(), UserEntity.class);
+			System.out.println("applicationUser " + applicationUser.getUsername() + applicationUser.getPassword());
+			authObj = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					applicationUser.getUsername(), applicationUser.getPassword(), new ArrayList<>()));
+			System.out.println("authObj = " + authObj.toString());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return authObj;
+	}
 
-    @Override
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
-    	System.out.println("successfulAuthentication" + req + auth);
-        Date exp = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
-        Key key = Keys.hmacShaKeyFor(KEY.getBytes());
-        Claims claims = Jwts.claims().setSubject(((User) auth.getPrincipal()).getUsername());
-        String token = Jwts.builder().setClaims(claims).signWith(key, SignatureAlgorithm.HS512).setExpiration(exp).compact();
-       System.out.println("token = "+ token);
-        res.addHeader("token", token);
+	@Override
+	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
+			Authentication auth) throws IOException, ServletException {
+		System.out.println("successfulAuthentication" + req + auth);
+		Date exp = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
+		Key key = Keys.hmacShaKeyFor(KEY.getBytes());
+		Claims claims = Jwts.claims().setSubject(((User) auth.getPrincipal()).getUsername());
+		String token = Jwts.builder().setClaims(claims).signWith(key, SignatureAlgorithm.HS512).setExpiration(exp)
+				.compact();
+		System.out.println("token = " + token);
+		res.addHeader("token", token);
 
-
-    }
+	}
 }
