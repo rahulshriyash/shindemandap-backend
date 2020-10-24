@@ -10,4 +10,9 @@ import com.shindemandapdecorators.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
 	public UserEntity findByEmailAndPassword(String email, String pwd);
+	/*
+	 * public UserEntity findByUsernameAndPassword(String username, String
+	 * password);
+	 */
+	
 }

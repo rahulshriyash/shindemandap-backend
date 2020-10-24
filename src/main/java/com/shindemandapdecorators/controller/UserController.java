@@ -40,7 +40,7 @@ public class UserController {
 		return userDto;
 	}
 
-	@PutMapping("/users/{id}")
+	@PutMapping("/user/{id}")
 	public UserDto updateUser(@PathVariable int id, @RequestBody UserDto userDto) {
 		userDto.setId(id);
 		service.updateUser(userDto);
@@ -53,7 +53,7 @@ public class UserController {
 		return service.getUsers();
 	}
 
-	@GetMapping("/users/{id}")
+	@GetMapping("/user/{id}")
 	public ResponseEntity<UserEntity> getUserById(@PathVariable int id) {
 		UserEntity userEntity = service.getUserById(id);
 		if (userEntity == null) {
@@ -62,7 +62,7 @@ public class UserController {
 		return new ResponseEntity<UserEntity>(userEntity, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/user/{id}")
 	public ResponseEntity<UserEntity> deleteUser(@PathVariable int id) {
 		UserEntity userEntity = this.service.deleteUser(id);
 		if (userEntity == null) {
