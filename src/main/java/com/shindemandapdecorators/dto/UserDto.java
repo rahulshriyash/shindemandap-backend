@@ -1,10 +1,19 @@
 package com.shindemandapdecorators.dto;
 
-public class UserDto {
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+public class UserDto extends User{
+	 public UserDto(String username, String password,
+	         Collection<? extends GrantedAuthority> authorities) {            
+	        super(username, password, authorities);
+	    }
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String password;
+	/* private String password; */
 	private String email;
 	private String username;
 
@@ -32,13 +41,11 @@ public class UserDto {
 		this.lastName = lastName;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	/*
+	 * public String getPassword() { return password; }
+	 * 
+	 * public void setPassword(String password) { this.password = password; }
+	 */
 
 	public String getEmail() {
 		return email;

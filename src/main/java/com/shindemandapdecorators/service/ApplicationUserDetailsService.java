@@ -1,15 +1,17 @@
 package com.shindemandapdecorators.service;
 
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.shindemandapdecorators.dto.UserDto;
 import com.shindemandapdecorators.entity.UserEntity;
 import com.shindemandapdecorators.repository.ApplicationUserRepository;
 
-import static java.util.Collections.emptyList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class ApplicationUserDetailsService implements UserDetailsService {
@@ -25,7 +27,14 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 		if (applicationUser == null) {
 			throw new UsernameNotFoundException(username);
 		}
-		
-		return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		UserDto userDto = new UserDto(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
+		userDto.setFirstName(applicationUser.getFirstName());
+		userDto.setLastName(applicationUser.getLastName());
+		userDto.setEmail(applicationUser.getEmail());
+		userDto.setId(applicationUser.getId());
+		userDto.setUsername(applicationUser.getUsername());
+		System.out.println("userDetails......." + userDto.getFirstName());
+		return userDto;
 	}
 }
