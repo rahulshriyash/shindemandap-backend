@@ -65,9 +65,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		userEntity.setEmail(userDto.getEmail());
 		userEntity.setUsername(userDto.getUsername());
 		userEntity.setId(userDto.getId());
+		System.out.println("userEntity......" +userEntity);
 		res.getWriter().write(new ObjectMapper().writeValueAsString(userEntity));
-
 		res.addHeader("token", token);
 	}
-
 }

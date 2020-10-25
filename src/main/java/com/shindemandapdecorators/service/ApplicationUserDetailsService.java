@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.shindemandapdecorators.dto.UserDto;
@@ -28,13 +29,14 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(username);
 		}
 		Set<GrantedAuthority> authorities = new HashSet<>();
+
 		UserDto userDto = new UserDto(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
 		userDto.setFirstName(applicationUser.getFirstName());
 		userDto.setLastName(applicationUser.getLastName());
 		userDto.setEmail(applicationUser.getEmail());
 		userDto.setId(applicationUser.getId());
+		userDto.setPassword(applicationUser.getPassword());
 		userDto.setUsername(applicationUser.getUsername());
-		System.out.println("userDetails......." + userDto.getFirstName());
 		return userDto;
 	}
 }
