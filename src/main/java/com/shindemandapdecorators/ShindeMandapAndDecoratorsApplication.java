@@ -14,7 +14,7 @@ public class ShindeMandapAndDecoratorsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShindeMandapAndDecoratorsApplication.class, args);
-		System.out.println("Welcome To Shinde Mandap Decorators");
+		System.out.println("Again Welcome To Shinde Mandap Decorators");
 	}
 	
 }
